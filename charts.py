@@ -1,7 +1,6 @@
 import data
 import altair as alt
 import datetime
-from vega_datasets import data
 import plotly.figure_factory as ff
 import numpy as np
 import scipy
