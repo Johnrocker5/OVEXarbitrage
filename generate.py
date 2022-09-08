@@ -74,10 +74,11 @@ def app():
                     message = f'''
                     Hi, can I please request **two** quotes:
 
-                    - **USD/ZAR ask**
-                    - **TUSD/ZAR bid**
+                    1. **USD/ZAR ask**
+                    2. **TUSD/ZAR bid**
 
                     **Details**:
+                    
                     - Full name: {name}
                     - Trade amount: {zar}
                     - FIA PIN: {fia}
