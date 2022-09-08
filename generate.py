@@ -73,11 +73,16 @@ def app():
                 if st.button('Generate quote'):
                     message = f'''Hi, can I please request *two* quotes:
 
-*1. USD/ZAR ask*
-*2. TUSD/ZAR bid*
+                    *1. USD/ZAR ask*
+                    *2. TUSD/ZAR bid*
 
-*Details*:
-- Full name: {name}
-- Trade amount: {zar}
-- FIA PIN: {fia}
-- Email: {email}'''
+                    *Details*:
+                    - Full name: {name}
+                    - Trade amount: {zar}
+                    - FIA PIN: {fia}
+                    - Email: {email}'''
+
+                    st.markdown('Your message to copy and paste')
+
+                    st.info(message)
+
