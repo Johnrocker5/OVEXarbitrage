@@ -72,10 +72,10 @@ def app():
             if happy:
                 if st.button('Generate quote'):
                     message = f'''
-                    Hi, can I please request *two* quotes:
+                    Hi, can I please request **two** quotes:
 
-                    **1. USD/ZAR ask**
-                    **2. TUSD/ZAR bid**
+                    - **USD/ZAR ask**
+                    - **TUSD/ZAR bid**
 
                     **Details**:
                     - Full name: {name}
