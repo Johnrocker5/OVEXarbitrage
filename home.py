@@ -1,6 +1,5 @@
 import streamlit as st
 import data
-import charts
 
 
 

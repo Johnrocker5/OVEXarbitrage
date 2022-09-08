@@ -1,12 +1,11 @@
 import streamlit as st
-import pywhatkit
 
 
 def app():
     st.title('Quote generation')
 
-    st.markdown('You can use this page to generate a quote request which will be sent to you' +
-                ' via WhatsApp to copy and send to the OVEX OTC desk when requesting a quote')
+    st.markdown('You can use this page to generate a quote request which you can copy, and paste in ' +
+                ' a WhatsApp chat, so that it is easily available')
 
     st.subheader('Enter your details')
 
@@ -40,19 +39,12 @@ def app():
     '''
     )
 
-    cell = st.text_input(
-        'Enter your cellphone number',
-        help='Format must be 0xxxxxxxxx'
-    )
 
-    if name != '' and email != '' and fia != '' and cell != '':
+    if name != '' and email != '' and fia != '':
         if len(fia) != 10:
             st.markdown(':warning: Invalid FIA PIN! Please ensure you have' +
                         ' entered the correct PIN')
-        if len(cell) != 10:
-            st.markdown(':warning: Invalid cellphone number! Please ensure you have' +
-                        ' entered your details correctly')
-        elif len(fia) == 10 and len(cell) == 10:
+        elif len(fia) == 10:
             x = trade_amount / 1000
             if x >= 1000:
                 y = trade_amount / 1000000
@@ -70,7 +62,6 @@ def app():
             You are about to request a quote for:
             - Name: {name}
             - Email: {email}
-            - Cellphone: {cell}
             - Trade amount: {zar}
             - FIA PIN: {fia}
             ''')
@@ -90,8 +81,3 @@ def app():
 - Trade amount: {zar}
 - FIA PIN: {fia}
 - Email: {email}'''
-
-                    pywhatkit.sendwhatmsg_instantly(
-                        phone_no='+27' + cell,
-                        message=message
-                    )
