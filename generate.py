@@ -72,12 +72,12 @@ def app():
             if happy:
                 if st.button('Generate quote'):
                     message = f'''
-                    Hi, can I please request **two** quotes:
+                    Hi, can I please request *two* quotes:
 
-                    1. **USD/ZAR ask**
-                    2. **TUSD/ZAR bid**
+                    1. *USD/ZAR ask*
+                    2. *TUSD/ZAR bid*
 
-                    **Details**:
+                    *Details*:
                     
                     - Full name: {name}
                     - Trade amount: {zar}
@@ -86,5 +86,5 @@ def app():
 
                     st.markdown('### Your message to copy and paste')
 
-                    st.info(message)
+                    st.code(message)
 
