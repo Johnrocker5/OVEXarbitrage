@@ -12,7 +12,6 @@ def app():
 
     st.markdown(''' ### You can use this app to:
     - View current spreads in real time for any trading amount
-    - View recent spreads
     - Calculate spread and profit based on OTC quote received from OVEX
     - View historical spreads and exchange rates
     - Analyse spreads for favourable days and times
