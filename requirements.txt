@@ -9,3 +9,4 @@ requests==2.28.1
 scipy==1.9.1
 streamlit==1.12.2
 yfinance==0.1.74
+json==2.0.9

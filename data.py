@@ -53,10 +53,11 @@ def get_data():
     df['spread_fx'] = df['spread_fx'].astype('float')
     df['usdzar_spot'] = df['usdzar_spot'].astype('float')
     df['tusdzar_spot'] = df['tusdzar_spot'].astype('float')
-    df['notification'] = df['notification'].apply(convert_int())
+    df['notification'] = df['notification'].apply(convert_int)
     df.rename(
         columns={
             'time': 'Time',
+            'day': 'Day',
             'spread_spot': 'Spot spread',
             'spread_fx': 'FX spread',
             'usdzar_spot': 'USDZAR',
