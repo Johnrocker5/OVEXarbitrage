@@ -28,43 +28,38 @@ def convert_int(x):
     return ans
 
 def get_data():
-    cnx = pymysql.connect(host=st.secrets.mysql.host,
-                      user=st.secrets.mysql.user,
-                      password=st.secrets.mysql.password,
-                      database=st.secrets.mysql.database,
-                      port=st.secrets.mysql.port,
-                      cursorclass=pymysql.cursors.DictCursor)
+    cnx = pymysql.connect(
+        host=st.secrets.mysql.host,
+        user=st.secrets.mysql.user,
+        password=st.secrets.mysql.password,
+        database=st.secrets.mysql.database,
+        port=st.secrets.mysql.port,
+        cursorclass=pymysql.cursors.DictCursor
+    )
     cursor = cnx.cursor()
     query1 = ('select * from spreads')
     cursor.execute(query1)
-    df = pd.DataFrame(cursor.fetchall())
-    df.columns = [['time', 'day', 'spread_spot', 'spread_fx', 'usdzar_spot',
-               'tusdzar_spot', 'notification']]
-    time = []
-    day = []
-    spread_spot = []
-    spread_fx = []
-    usdzar_spot = []
-    tusdzar_spot = []
-    notification = []
-    for i in df.index:
-        t = df['time'].iloc[i].item()
-        time.append(convert_datetime(t))
-        d = df['day'].iloc[i].item()
-        day.append(d)
-        ss = df['spread_spot'].iloc[i].item()
-        spread_spot.append(convert_floats(ss))
-        sfx = df['spread_fx'].iloc[i].item()
-        spread_fx.append(convert_floats(sfx))
-        uzs = df['usdzar_spot'].iloc[i].item()
-        usdzar_spot.append(convert_floats(uzs))
-        tuzs = df['tusdzar_spot'].iloc[i].item()
-        tusdzar_spot.append(convert_floats(tuzs))
-        notif = df['notification'].iloc[i].item()
-        notification.append(convert_int(notif))
-    df = pd.DataFrame({'Time': time, 'Day': day, 'Spot spread': spread_spot,
-                       'FX spread': spread_fx, 'USDZAR': usdzar_spot,
-                       'TUSDZAR': tusdzar_spot, 'notification': notification})
+    rawData = cursor.fetchall()
+    jsonData = json.dumps(rawData)
+    jsonStringList = json.loads(jsonData)
+    df = pd.json_normalize(jsonStringList)
+    df['time'] = df['time'].apply(convert_datetime)
+    df['spread_spot'] = df['spread_spot'].astype('float')
+    df['spread_fx'] = df['spread_fx'].astype('float')
+    df['usdzar_spot'] = df['usdzar_spot'].astype('float')
+    df['tusdzar_spot'] = df['tusdzar_spot'].astype('float')
+    df['notification'] = df['notification'].apply(convert_int)
+    df.rename(
+        columns={
+            'time': 'Time',
+            'day': 'Day',
+            'spread_spot': 'Spot spread',
+            'spread_fx': 'FX spread',
+            'usdzar_spot': 'USDZAR',
+            'tusdzar_spot': 'TUSDZAR'
+        },
+        inplace=True
+    )
     return df
 
 
